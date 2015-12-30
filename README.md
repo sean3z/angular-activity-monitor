@@ -3,7 +3,7 @@ This is a simple service that will emit a couple of events based on the users' D
 
 **Usage**:
 ```js
-angular.module('myModule', ['wdpr.wdprAngularCore.activityMonitor']);
+angular.module('myModule', ['ActivityMonitor']);
 MyController.$inject = ['ActivityMonitor'];
 
 function MyController(ActivityMonitor) {
