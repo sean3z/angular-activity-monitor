@@ -1,7 +1,8 @@
 ## Angular Activity Monitor
 This is a simple service that will emit a couple of events based on the users' DOM activity. It also allows you to "keep items alive" in the background so long as the user is considered "active".
 
-**Usage**:
+#### Usage:
+
 ```js
 angular.module('myModule', ['ActivityMonitor']);
 MyController.$inject = ['ActivityMonitor'];
@@ -13,27 +14,26 @@ function MyController(ActivityMonitor) {
   }
 }
 ```
+##### `ActivityMonitor.options` (configuration):
+ * `enabled`: whether to regularly check for inactivity (default: `false`) [bool]
+ * `keepAlive`: background execution frequency (default: `800`) [seconds]
+ * `inactive`: how long until user is considered inactive (default: `900`) [seconds]
+ * `warning`: when user is nearing inactive state (deducted from inactive) (default: `60`) [seconds]
 
-**Options** (configuration):
- - `enabled`: whether to regularly check for inactivity (default: `false`) [bool]
- - `keepAlive`: background execution frequency (default: `800`) [seconds]
- - `inactive`: how long until user is considered inactive (default: `900`) [seconds]
- - `warning`: when user is nearing inactive state (deducted from inactive) (default: `60`) [seconds]
+##### `ActivityMonitor.user` (information about the user):
+ * `action`: timestamp of the users' last action (default: `Date.now()`) [milliseconds]
+ * `active`: is the user considered active? (default: `true`) [bool]
+ * `warning`: is the user nearing inactivity? (default: `false`) [bool]
 
-**User** (information about the user):
- - `action`: timestamp of the users' last action (default: `Date.now()`) [milliseconds]
- - `active`: is the user considered active? (default: `true`) [bool]
- - `warning`: is the user nearing inactivity? (default: `false`) [bool]
+##### `ActivityMonitor` Methods:
+ * `on(event, callback)` (alias `bind`): subsribe to a particular event
+ * `off(event[, callback])` (alias `unbind`): unsubscribe to a particular event. If no `callback` or `namespace` provided, all subscribers for the given `event` will be cleared.
+ * `activity()`: manually invoke user activity (this updates the `User` object above)
 
-**Methods**:
- - `on(event, callback)` (alias `bind`): subsribe to a particular event
- - `off(event[, callback])` (alias `unbind`): unsubscribe to a particular event. If no `callback` or `namespace` provided, all subscribers for the given `event` will be cleared.
- - `activity()`: manually invoke user activity (this updates the `User` object above)
-
-**Events**:
- - `keepAlive`: anything to execute (at the `Options.keepAlive` interval) so long as the user is active.
- - `warning`: when user is approaching inactive state
- - `inactive`: when user is officially considered inactive
+##### `ActivityMonitor` Events:
+ * `keepAlive`: anything to execute (at the `Options.keepAlive` interval) so long as the user is active.
+ * `warning`: when user is approaching inactive state
+ * `inactive`: when user is officially considered inactive
 
 #### When is the user considered active?
 Everytime one of the follow DOM events occur, the `action` and `active` properties on the `User` object is updated accordingly. Someone should probably make this customizable as this is not exposed currently.
