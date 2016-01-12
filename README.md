@@ -5,8 +5,8 @@ This is a simple service that will emit a couple of events based on the users' D
 
 ```js
 angular.module('myModule', ['ActivityMonitor']);
-
 MyController.$inject = ['ActivityMonitor'];
+
 function MyController(ActivityMonitor) {
   ActivityMonitor.on('inactive', function() {
     alert("y0, you're inactive!");
