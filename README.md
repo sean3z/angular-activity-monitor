@@ -34,6 +34,9 @@ function MyController(ActivityMonitor) {
  * `keepAlive`: anything to execute (at the `Options.keepAlive` interval) so long as the user is active.
  * `warning`: when user is approaching inactive state
  * `inactive`: when user is officially considered inactive
+ 
+#### How long until user is inactive?
+This can be configured by setting the `ActivityMonitor.options.inactive` property to the desired timeout (in seconds).
 
 #### When is the user considered active?
 Everytime one of the follow DOM events occur, the `action` and `active` properties on the `User` object is updated accordingly. Someone should probably make this customizable as this is not exposed currently.
