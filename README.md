@@ -8,10 +8,9 @@ angular.module('myModule', ['ActivityMonitor']);
 MyController.$inject = ['ActivityMonitor'];
 
 function MyController(ActivityMonitor) {
-  ActivityMonitor.on('inactive', foo);
-  function foo() {
+  ActivityMonitor.on('inactive', function() {
     alert("y0, you're inactive!");
-  }
+  });
 }
 ```
 ##### `ActivityMonitor.options` (configuration):
