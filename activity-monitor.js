@@ -10,8 +10,9 @@
     var EVENT_KEEPALIVE = 'keepAlive';
     var EVENT_INACTIVE = 'inactive';
     var EVENT_WARNING = 'warning';
+    var EVENT_ACTIVITY = 'activity';
 
-    /* @ngInject */
+    ActivityMonitor.$inject = ['$document'];
     function ActivityMonitor($document) {
         var service = this;
 
@@ -39,6 +40,7 @@
         events[EVENT_KEEPALIVE] = {};  /* functions to invoke along with ping (options.frequency) */
         events[EVENT_INACTIVE] = {};   /* functions to invoke when user goes inactive (options.threshold) */
         events[EVENT_WARNING] = {};    /* functions to invoke when warning user about inactivity (options.warning) */
+        events[EVENT_ACTIVITY] = {};   /* functions to invoke any time a user makes a move */
 
         var timer = {
             inactivity: null,   /* setInterval handle to determine whether the user is inactive */
@@ -94,6 +96,8 @@
         function activity() {
             service.user.active = true;
             service.user.action = Date.now();
+
+            publish(EVENT_ACTIVITY);
 
             if (service.user.warning) {
                 service.user.warning = false;
