@@ -1,0 +1,31 @@
+{
+  "name": "angular-activity-monitor",
+  "homepage": "https://github.com/sean3z/angular-activity-monitor",
+  "authors": [
+    "Sean Wragg <seanwragg@gmail.com>"
+  ],
+  "description": "An Angular service that tracks users' DOM activity",
+  "main": "activity-monitor.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "angular",
+    "activity-monitor",
+    "keepalive",
+    "timeout",
+    "idle",
+    "user"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.4"
+  }
+}

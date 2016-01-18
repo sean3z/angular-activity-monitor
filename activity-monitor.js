@@ -3,7 +3,7 @@
 
 (function() {
     angular
-        .module('ActivityMonitor')
+        .module('ActivityMonitor', [])
         .service('ActivityMonitor', ActivityMonitor);
 
     var MILLISECOND = 1000;

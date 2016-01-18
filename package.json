@@ -1,0 +1,41 @@
+{
+  "name": "angular-activity-monitor",
+  "version": "1.0.0",
+  "description": "An Angular service that tracks users' DOM activity",
+  "main": "activity-monitor.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/sean3z/angular-activity-monitor.git"
+  },
+  "keywords": [
+    "angular",
+    "activity-monitor",
+    "keepalive",
+    "timeout",
+    "idle",
+    "user"
+  ],
+  "author": "Sean Wragg <seanwragg@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sean3z/angular-activity-monitor/issues"
+  },
+  "homepage": "https://github.com/sean3z/angular-activity-monitor#readme",
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "^0.12.0",
+    "grunt-jscs": "^2.6.0",
+    "jit-grunt": "^0.9.1",
+    "jscs": "^2.8.0",
+    "jshint": "^2.9.1",
+    "mocha": "^2.3.4"
+  }
+}
