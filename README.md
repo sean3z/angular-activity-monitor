@@ -1,6 +1,11 @@
 ## Angular Activity Monitor
 This is a simple service that will emit a couple of events based on the users' DOM activity. It also allows you to "keep items alive" in the background so long as the user is considered "active".
 
+#### Installation:
+```bash
+$ bower install angular-activity-monitor
+```
+
 #### Usage:
 
 ```js
