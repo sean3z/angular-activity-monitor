@@ -1,0 +1,18 @@
+.inner {
+  width: 960px;
+}
+
+code {
+  padding: 3px;
+  border-radius: 3px;
+  border: solid 1px #E3E3E3;
+}
+
+ul li {
+  padding-left: 0px;
+  margin-left: 20px;
+}
+
+h5 {
+  font-weight: bold;
+}
