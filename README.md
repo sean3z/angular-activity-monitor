@@ -5,9 +5,14 @@ This is a simple service that will emit a couple of events based on the users' D
 ```bash
 $ bower install angular-activity-monitor
 ```
+or
+
+```bash
+$ npm install --save angular-activity-monitor
+```
 
 #### Usage:
-
+**Bower:** 
 ```js
 angular.module('myModule', ['ActivityMonitor']);
 MyController.$inject = ['ActivityMonitor'];
@@ -18,6 +23,19 @@ function MyController(ActivityMonitor) {
   });
 }
 ```
+
+**npm (with Webpack or Bowserify)** :
+```js
+angular.module('myModule', [require('angular-activity-monitor')]);
+MyController.$inject = ['ActivityMonitor'];
+
+function MyController(ActivityMonitor) {
+  ActivityMonitor.on('inactive', function() {
+    alert("y0, you're inactive!");
+  });
+}
+```
+
 ##### `ActivityMonitor.options` (configuration):
  * `enabled`: whether to regularly check for inactivity (default: `false`) [bool]
  * `keepAlive`: background execution frequency (default: `800`) [seconds]

@@ -1,7 +1,7 @@
 /*jshint -W116, -W030, latedef: false */
 'use strict';
 
-(function(root, factory) {
+(function (root, factory) {
     if (typeof module !== 'undefined' && module.exports) {
         // CommonJS
         if (typeof angular === 'undefined') {
@@ -17,7 +17,7 @@
         // Global variables
         factory(root.angular);
     }
-}(this, function(angular) {
+}(this, function (angular) {
     var m = angular
             .module('ActivityMonitor', [])
             .service('ActivityMonitor', ActivityMonitor);
@@ -84,14 +84,14 @@
             service.options.enabled = true;
             service.user.warning = false;
 
-            timer.keepAlive = setInterval(function() {
+            timer.keepAlive = setInterval(function () {
                 publish(EVENT_KEEPALIVE);
             }, service.options.keepAlive * MILLISECOND);
 
-            timer.inactivity = setInterval(function() {
+            timer.inactivity = setInterval(function () {
                 var now = Date.now();
-                var warning = now - ((service.options.inactive - service.options.warning) * MILLISECOND);
-                var inactive = now - (service.options.inactive * MILLISECOND);
+                var warning = now - (service.options.inactive - service.options.warning) * MILLISECOND;
+                var inactive = now - service.options.inactive * MILLISECOND;
 
                 /* should we display warning */
                 if (!service.user.warning && service.user.action <= warning) {
@@ -125,7 +125,7 @@
             if (!service.options.enabled) return;
             var spaces = Object.keys(events[event]);
             if (!event || !spaces.length) return;
-            spaces.forEach(function(space) {
+            spaces.forEach(function (space) {
                 events[event][space] && events[event][space]();
             });
         }
