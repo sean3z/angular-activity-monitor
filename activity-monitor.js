@@ -1,10 +1,26 @@
 /*jshint -W116, -W030, latedef: false */
 'use strict';
 
-(function() {
-    angular
-        .module('ActivityMonitor', [])
-        .service('ActivityMonitor', ActivityMonitor);
+(function(root, factory) {
+    if (typeof module !== 'undefined' && module.exports) {
+        // CommonJS
+        if (typeof angular === 'undefined') {
+            factory(require('angular'));
+        } else {
+            factory(angular);
+        }
+        module.exports = 'ActivityMonitor';
+    } else if (typeof define === 'function' && define.amd) {
+        // AMD
+        define(['angular'], factory);
+    } else {
+        // Global variables
+        factory(root.angular);
+    }
+}(this, function(angular) {
+    var m = angular
+            .module('ActivityMonitor', [])
+            .service('ActivityMonitor', ActivityMonitor);
 
     var MILLISECOND = 1000;
     var EVENT_KEEPALIVE = 'keepAlive';
@@ -147,4 +163,6 @@
             };
         }
     }
-})();
+
+    return m;
+}));
