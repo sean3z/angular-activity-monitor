@@ -39,8 +39,10 @@
             inactive: 900,  /* how long until user is considered inactive? (seconds) */
             warning: 60,    /* when to warn user when nearing inactive state (deducted from inactive in seconds) */
             monitor: 3,     /* how frequently to check if the user is inactive (seconds) */
-            DOMevents: ['mousemove', 'mousedown', 'mouseup', 'keypress', 'wheel', 'touchstart', 'scroll'].join(' ') /* list of DOM events to determine user's activity */
+            DOMevents: ['mousemove', 'mousedown', 'mouseup', 'keypress', 'wheel', 'touchstart', 'scroll'] /* list of DOM events to determine user's activity */
         };
+
+        var DOMevents = service.options.DOMevents.join(' ');
 
         /* user activity */
         service.user = {
@@ -74,11 +76,11 @@
             clearInterval(timer.inactivity);
             clearInterval(timer.keepAlive);
 
-            $document.off(service.options.DOMevents, activity);
+            $document.off(DOMevents, activity);
         }
 
         function enable() {
-            $document.on(service.options.DOMevents, activity);
+            $document.on(DOMevents, activity);
             service.options.enabled = true;
             service.user.warning = false;
 
