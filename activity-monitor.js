@@ -1,10 +1,26 @@
 /*jshint -W116, -W030, latedef: false */
 'use strict';
 
-(function() {
-    angular
-        .module('ActivityMonitor', [])
-        .service('ActivityMonitor', ActivityMonitor);
+(function (root, factory) {
+    if (typeof module !== 'undefined' && module.exports) {
+        // CommonJS
+        if (typeof angular === 'undefined') {
+            factory(require('angular'));
+        } else {
+            factory(angular);
+        }
+        module.exports = 'ActivityMonitor';
+    } else if (typeof define === 'function' && define.amd) {
+        // AMD
+        define(['angular'], factory);
+    } else {
+        // Global variables
+        factory(root.angular);
+    }
+}(this, function (angular) {
+    var m = angular
+            .module('ActivityMonitor', [])
+            .service('ActivityMonitor', ActivityMonitor);
 
     var MILLISECOND = 1000;
     var EVENT_KEEPALIVE = 'keepAlive';
@@ -22,8 +38,11 @@
             keepAlive: 800, /* keepAlive ping invterval (seconds) */
             inactive: 900,  /* how long until user is considered inactive? (seconds) */
             warning: 60,    /* when to warn user when nearing inactive state (deducted from inactive in seconds) */
-            monitor: 3      /* how frequently to check if the user is inactive (seconds) */
+            monitor: 3,     /* how frequently to check if the user is inactive (seconds) */
+            DOMevents: ['mousemove', 'mousedown', 'mouseup', 'keypress', 'wheel', 'touchstart', 'scroll'] /* list of DOM events to determine user's activity */
         };
+
+        var DOMevents = service.options.DOMevents.join(' ');
 
         /* user activity */
         service.user = {
@@ -47,9 +66,6 @@
             keepAlive: null     /* setInterval handle for ping handler (options.frequency) */
         };
 
-        /* list of DOM events to determine user's activity */
-        var DOMevents = ['mousemove', 'mousedown', 'keypress', 'wheel', 'touchstart', 'scroll'].join(' ');
-
         return service;
 
         ///////////////
@@ -68,14 +84,14 @@
             service.options.enabled = true;
             service.user.warning = false;
 
-            timer.keepAlive = setInterval(function() {
+            timer.keepAlive = setInterval(function () {
                 publish(EVENT_KEEPALIVE);
             }, service.options.keepAlive * MILLISECOND);
 
-            timer.inactivity = setInterval(function() {
+            timer.inactivity = setInterval(function () {
                 var now = Date.now();
-                var warning = now - ((service.options.inactive - service.options.warning) * MILLISECOND);
-                var inactive = now - (service.options.inactive * MILLISECOND);
+                var warning = now - (service.options.inactive - service.options.warning) * MILLISECOND;
+                var inactive = now - service.options.inactive * MILLISECOND;
 
                 /* should we display warning */
                 if (!service.user.warning && service.user.action <= warning) {
@@ -109,7 +125,7 @@
             if (!service.options.enabled) return;
             var spaces = Object.keys(events[event]);
             if (!event || !spaces.length) return;
-            spaces.forEach(function(space) {
+            spaces.forEach(function (space) {
                 events[event][space] && events[event][space]();
             });
         }
@@ -147,4 +163,6 @@
             };
         }
     }
-})();
+
+    return m;
+}));
