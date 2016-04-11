@@ -27,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/sean3z/angular-activity-monitor/issues"
   },
-  "homepage": "https://github.com/sean3z/angular-activity-monitor#readme",
+  "homepage": "http://sean3z.github.io/angular-activity-monitor",
   "devDependencies": {
     "angular": "~1.4.9",
     "angular-mocks": "~1.4.9",
