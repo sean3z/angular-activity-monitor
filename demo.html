@@ -37,6 +37,10 @@
         <section id="main_content" ng-controller="myController as myCtrl">
           <p>Inactive in: <strong>{{myCtrl.countdown}} seconds</strong></p>
           <a href="#" class="button" style="float: none;" ng-click="myCtrl.startDemo()"><span>Start Demo</span></a>
+          <p>
+            Click the button above, then move your mouse around to reset the timer.<br />
+            Once the timer reaches 0, you should get an alert.
+          </p>
         </section>  
 
         <footer>
