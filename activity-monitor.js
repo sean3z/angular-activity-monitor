@@ -85,6 +85,7 @@
 
         function disableIntervals(){
             clearInterval(timer.inactivity);
+            clearInterval(timer.keepAlive);
             delete timer.inactivity;
             delete timer.keepAlive;
         }
