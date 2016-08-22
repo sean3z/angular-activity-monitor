@@ -39,6 +39,7 @@
             inactive: 900,  /* how long until user is considered inactive? (seconds) */
             warning: 60,    /* when to warn user when nearing inactive state (deducted from inactive in seconds) */
             monitor: 3,     /* how frequently to check if the user is inactive (seconds) */
+            disableOnInactive: true, /* by default, once user becomes inactive, all listeners are detached */
             DOMevents: ['mousemove', 'mousedown', 'mouseup', 'keypress', 'wheel', 'touchstart', 'scroll'] /* list of DOM events to determine user's activity */
         };
 
@@ -103,7 +104,10 @@
                 if (service.user.active && service.user.action <= inactive) {
                     service.user.active = false;
                     publish(EVENT_INACTIVE);
-                    disable();
+
+                    if(service.options.disableOnInactive){
+                        disable();
+                    }
                 }
             }, service.options.monitor * MILLISECOND);
         }

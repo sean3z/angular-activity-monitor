@@ -129,4 +129,21 @@ describe('Angular Activity Monitor', function() {
         });
     });
 
+    describe('when not disableOnInactive', function() {
+        beforeEach(function(){
+            ActivityMonitor.options.disableOnInactive = false
+        })
+
+        it('should be enabled',function(done){
+            ActivityMonitor.on('keepAlive', noop);
+            expect(options.enabled).to.equal(true);
+
+            setTimeout(function() {
+                expect(options.enabled).to.equal(true);
+                done();
+            }, 401);
+
+        })
+    });
+
 });
