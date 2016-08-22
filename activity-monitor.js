@@ -67,6 +67,10 @@
             keepAlive: null     /* setInterval handle for ping handler (options.frequency) */
         };
 
+        enable.timer = timer
+        service.enable = enable
+        service.disable = disable
+
         return service;
 
         ///////////////
@@ -74,10 +78,15 @@
         function disable() {
             service.options.enabled = false;
 
-            clearInterval(timer.inactivity);
-            clearInterval(timer.keepAlive);
+            disableIntervals()
 
             $document.off(DOMevents, activity);
+        }
+
+        function disableIntervals(){
+            clearInterval(timer.inactivity);
+            delete timer.inactivity;
+            delete timer.keepAlive;
         }
 
         function enable() {
@@ -85,6 +94,10 @@
             service.options.enabled = true;
             service.user.warning = false;
 
+            enableIntervals();
+        }
+
+        function enableIntervals(){
             timer.keepAlive = setInterval(function () {
                 publish(EVENT_KEEPALIVE);
             }, service.options.keepAlive * MILLISECOND);
@@ -107,13 +120,32 @@
 
                     if(service.options.disableOnInactive){
                         disable();
+                    }else{
+                        disableIntervals();//user inactive is known, lets stop checking, for now
+                        dynamicActivity = reactivate;//hot swap method that handles document event watching
                     }
                 }
             }, service.options.monitor * MILLISECOND);
         }
 
+        /* function that lives in memory with the intention of being swapped out */
+        function dynamicActivity(){
+            regularActivityMonitor();
+        }
+
+        /* after user inactive, this method is hot swapped as the dynamicActivity method in-which the next user activity reactivates monitors */
+        function reactivate() {
+            enableIntervals();
+            dynamicActivity = regularActivityMonitor;
+        }
+
         /* invoked on every user action */
-        function activity() {
+        function activity(){
+            dynamicActivity()
+        }
+
+        /* during a users active state the following method is called */
+        function regularActivityMonitor() {
             service.user.active = true;
             service.user.action = Date.now();
 

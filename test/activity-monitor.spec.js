@@ -142,7 +142,25 @@ describe('Angular Activity Monitor', function() {
                 expect(options.enabled).to.equal(true);
                 done();
             }, 401);
+        })
 
+        it('should reactivate',function(done){
+            ActivityMonitor.on('keepAlive', noop);
+            expect(options.enabled).to.equal(true);
+
+            setTimeout(function() {
+                expect(options.enabled).to.equal(true);
+    
+                expect(typeof ActivityMonitor.enable.timer.inactivity).to.equal('undefined');
+                expect(typeof ActivityMonitor.enable.timer.keepAlive).to.equal('undefined');
+
+                ActivityMonitor.activity();
+
+                expect(typeof ActivityMonitor.enable.timer.inactivity).to.equal('number');
+                expect(typeof ActivityMonitor.enable.timer.keepAlive).to.equal('number');
+
+                done();
+            }, 401);
         })
     });
 
