@@ -141,7 +141,7 @@ describe('Angular Activity Monitor', function() {
             setTimeout(function() {
                 expect(options.enabled).to.equal(true);
                 done();
-            }, 401);
+            }, 410);
         })
 
         it('should reactivate',function(done){
@@ -150,7 +150,7 @@ describe('Angular Activity Monitor', function() {
 
             setTimeout(function() {
                 expect(options.enabled).to.equal(true);
-    
+
                 expect(typeof ActivityMonitor.enable.timer.inactivity).to.equal('undefined');
                 expect(typeof ActivityMonitor.enable.timer.keepAlive).to.equal('undefined');
 
@@ -160,7 +160,7 @@ describe('Angular Activity Monitor', function() {
                 expect(typeof ActivityMonitor.enable.timer.keepAlive).to.equal('number');
 
                 done();
-            }, 401);
+            }, 410);
         })
     });
 
