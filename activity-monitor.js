@@ -43,8 +43,6 @@
             DOMevents: ['mousemove', 'mousedown', 'mouseup', 'keypress', 'wheel', 'touchstart', 'scroll'] /* list of DOM events to determine user's activity */
         };
 
-        var DOMevents = service.options.DOMevents.join(' ');
-
         /* user activity */
         service.user = {
             action: Date.now(), /* timestamp of the users' last action */
@@ -80,7 +78,7 @@
 
             disableIntervals()
 
-            $document.off(DOMevents, activity);
+            $document.off(service.options.DOMevents.join(' '), activity);
         }
 
         function disableIntervals(){
@@ -91,7 +89,7 @@
         }
 
         function enable() {
-            $document.on(DOMevents, activity);
+            $document.on(service.options.DOMevents.join(' '), activity);
             service.options.enabled = true;
             service.user.warning = false;
 
