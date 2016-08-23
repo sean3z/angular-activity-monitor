@@ -41,6 +41,7 @@ function MyController(ActivityMonitor) {
  * `keepAlive`: background execution frequency (default: `800`) [seconds]
  * `inactive`: how long until user is considered inactive (default: `900`) [seconds]
  * `warning`: when user is nearing inactive state (deducted from inactive) (default: `60`) [seconds]
+ * `disableOnInactive`: Once user is inactive all event listeners are detached and user activity monitoring is discontinued (default: true) [bool]
  * `DOMevents`: array of events on the DOM that count as user activity (default: `['mousemove', 'mousedown', 'mouseup', 'keypress', 'wheel', 'touchstart', 'scroll']`)
 
 ##### `ActivityMonitor.user` (information about the user):
