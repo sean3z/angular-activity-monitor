@@ -3,32 +3,18 @@ This is a simple service that will emit a couple of events based on the users' D
 
 #### Installation:
 ```bash
-$ bower install angular-activity-monitor
-```
-or
-
-```bash
-$ npm install --save angular-activity-monitor
+$ [npm|bower] install --save angular-activity-monitor
 ```
 
 #### Usage:
-**Bower:** 
 ```js
+// with bower (or without packaging)
 angular.module('myModule', ['ActivityMonitor']);
-MyController.$inject = ['ActivityMonitor'];
 
-function MyController(ActivityMonitor) {
-  ActivityMonitor.on('inactive', function() {
-    alert("y0, you're inactive!");
-  });
-}
-```
-
-**npm (with Webpack or Bowserify)** :
-```js
+// with npm (via webpack or Browserify)
 angular.module('myModule', [require('angular-activity-monitor')]);
-MyController.$inject = ['ActivityMonitor'];
 
+MyController.$inject = ['ActivityMonitor'];
 function MyController(ActivityMonitor) {
   ActivityMonitor.on('inactive', function() {
     alert("y0, you're inactive!");
@@ -41,7 +27,7 @@ function MyController(ActivityMonitor) {
  * `keepAlive`: background execution frequency (default: `800`) [seconds]
  * `inactive`: how long until user is considered inactive (default: `900`) [seconds]
  * `warning`: when user is nearing inactive state (deducted from inactive) (default: `60`) [seconds]
- * `disableOnInactive`: Once user is inactive all event listeners are detached and user activity monitoring is discontinued (default: true) [bool]
+ * `disableOnInactive`: Once user is inactive, all event listeners are detached and activity monitoring is discontinued (default: `true`) [bool]
  * `DOMevents`: array of events on the DOM that count as user activity (default: `['mousemove', 'mousedown', 'mouseup', 'keypress', 'wheel', 'touchstart', 'scroll']`)
 
 ##### `ActivityMonitor.user` (information about the user):
@@ -63,7 +49,7 @@ function MyController(ActivityMonitor) {
 This can be configured by setting the `ActivityMonitor.options.inactive` property to the desired timeout (in seconds).
 
 #### When is the user considered active?
-Everytime one of the follow DOM events occur, the `action` and `active` properties on the `User` object is updated accordingly. Someone should probably make this customizable as this is not exposed currently.
+Everytime one of the follow DOM events occur, the `action` and `active` properties on the `User` object is updated accordingly.
 ```js
 var DOMevents = ['mousemove', 'mousedown', 'keypress', 'wheel', 'touchstart', 'scroll'];
 ```
