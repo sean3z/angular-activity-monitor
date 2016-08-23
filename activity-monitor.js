@@ -67,9 +67,9 @@
             keepAlive: null     /* setInterval handle for ping handler (options.frequency) */
         };
 
-        enable.timer = timer
-        service.enable = enable
-        service.disable = disable
+        enable.timer = timer;
+        service.enable = enable;
+        service.disable = disable;
 
         return service;
 
